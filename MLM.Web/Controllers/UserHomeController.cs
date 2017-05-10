@@ -112,5 +112,31 @@ namespace MLM.Web.Controllers
             }
 
         }
+
+        public ActionResult Index()
+        {
+            if (GlobalClass.SystemSession)
+            {
+                //DashboardClass model = new DashboardClass();
+                //model.FirstGrid = new List<DashboardJobClass>();
+                //model.FirstGrid = setup.FillFirstGrid(1);
+
+                //model.SecGrid = new List<DashboardJobClass>();
+                //model.SecGrid = setup.FillFirstGrid(2);
+
+                //model.ThirdGrid = new List<DashboardJobClass>();
+                //model.ThirdGrid = setup.FillFirstGrid(3);
+
+                //model.ForthGrid = new List<DashboardJobClass>();
+                //model.ForthGrid = setup.FillFirstGrid(4);
+                return View();
+            }
+            else
+            {
+                Exception e = new Exception("Sorry, your Session has Expired");
+                return View("Error", new HandleErrorInfo(e, "UserHome", "Logout"));
+            }
+
+        }
     }
 }
