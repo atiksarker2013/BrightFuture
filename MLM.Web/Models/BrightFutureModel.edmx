@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BrightFutureHoustoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyKey" />
+          </Key>
+          <Property Name="CompanyKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyID" Type="nvarchar(max)" />
+          <Property Name="CompanyName" Type="nvarchar(max)" />
+          <Property Name="CompanyAddress" Type="nvarchar(max)" />
+          <Property Name="CompanyPhone" Type="nvarchar(max)" />
+          <Property Name="CompanyMobile" Type="nvarchar(max)" />
+          <Property Name="CompanyEmail" Type="nvarchar(max)" />
+          <Property Name="CompanyWebsite" Type="nvarchar(max)" />
+          <Property Name="CompanyFax" Type="nvarchar(max)" />
+          <Property Name="ContactPersonName" Type="nvarchar(max)" />
+          <Property Name="ContactPersonNo" Type="nvarchar(max)" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="LogoType" Type="varchar(max)" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="StateCode" Type="int" />
+          <Property Name="CityKey" Type="int" />
+          <Property Name="ZIPKey" Type="bigint" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="ContactEmail" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="StaffList">
+          <Key>
+            <PropertyRef Name="PersonnelKey" />
+          </Key>
+          <Property Name="PersonnelKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PID" Type="nvarchar(max)" />
+          <Property Name="PName" Type="nvarchar(max)" />
+          <Property Name="Mobile" Type="nvarchar(max)" />
+          <Property Name="Mail" Type="nvarchar(max)" />
+          <Property Name="Designation" Type="nvarchar(max)" />
+          <Property Name="Department" Type="nvarchar(max)" />
+          <Property Name="Pic" Type="image" />
+          <Property Name="PicType" Type="nvarchar(max)" />
+          <Property Name="CompanyKey" Type="uniqueidentifier" />
+          <Property Name="Usergr" Type="uniqueidentifier" />
+          <Property Name="Username" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="IsUser" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Usergroup">
+          <Key>
+            <PropertyRef Name="UserGroupKey" />
+          </Key>
+          <Property Name="UserGroupKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GroupID" Type="nvarchar(max)" />
+          <Property Name="GroupName" Type="nvarchar(max)" />
+          <Property Name="CompanyKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserGroupForm">
+          <Key>
+            <PropertyRef Name="UserGroupFormKey" />
+          </Key>
+          <Property Name="UserGroupFormKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserGroupKey" Type="uniqueidentifier" />
+          <Property Name="CompanyKey" Type="uniqueidentifier" />
+          <Property Name="ModuleKey" Type="uniqueidentifier" />
+          <Property Name="FormKey" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="UserGroupModule">
+          <Key>
+            <PropertyRef Name="UserGroupModuleKey" />
+          </Key>
+          <Property Name="UserGroupModuleKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserGroupKey" Type="uniqueidentifier" />
+          <Property Name="CompanyKey" Type="uniqueidentifier" />
+          <Property Name="ModuleKey" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityContainer Name="BrightFutureHoustoneModelStoreContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffList" EntityType="Self.StaffList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usergroup" EntityType="Self.Usergroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroupForm" EntityType="Self.UserGroupForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroupModule" EntityType="Self.UserGroupModule" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BrightFutureHoustoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="StaffList">
+          <Key>
+            <PropertyRef Name="PersonnelKey" />
+          </Key>
+          <Property Name="PersonnelKey" Type="Guid" Nullable="false" />
+          <Property Name="PID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PicType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyKey" Type="Guid" />
+          <Property Name="Usergr" Type="Guid" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsUser" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Usergroup">
+          <Key>
+            <PropertyRef Name="UserGroupKey" />
+          </Key>
+          <Property Name="UserGroupKey" Type="Guid" Nullable="false" />
+          <Property Name="GroupID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserGroupForm">
+          <Key>
+            <PropertyRef Name="UserGroupFormKey" />
+          </Key>
+          <Property Name="UserGroupFormKey" Type="Guid" Nullable="false" />
+          <Property Name="UserGroupKey" Type="Guid" />
+          <Property Name="CompanyKey" Type="Guid" />
+          <Property Name="ModuleKey" Type="Guid" />
+          <Property Name="FormKey" Type="Guid" />
+        </EntityType>
+        <EntityType Name="UserGroupModule">
+          <Key>
+            <PropertyRef Name="UserGroupModuleKey" />
+          </Key>
+          <Property Name="UserGroupModuleKey" Type="Guid" Nullable="false" />
+          <Property Name="UserGroupKey" Type="Guid" />
+          <Property Name="CompanyKey" Type="Guid" />
+          <Property Name="ModuleKey" Type="Guid" />
+        </EntityType>
+        <EntityContainer Name="BrightFutureHoustoneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="StaffList" EntityType="Self.StaffList" />
+          <EntitySet Name="Usergroup" EntityType="Self.Usergroup" />
+          <EntitySet Name="UserGroupForm" EntityType="Self.UserGroupForm" />
+          <EntitySet Name="UserGroupModule" EntityType="Self.UserGroupModule" />
+          <EntitySet Name="Company" EntityType="BrightFutureHoustoneModel.Company" />
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyKey" />
+          </Key>
+          <Property Name="CompanyKey" Type="Guid" Nullable="false" />
+          <Property Name="CompanyID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyWebsite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyFax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPersonName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPersonNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LogoType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="StateCode" Type="Int32" />
+          <Property Name="CityKey" Type="Int32" />
+          <Property Name="ZIPKey" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BrightFutureHoustoneModelStoreContainer" CdmEntityContainer="BrightFutureHoustoneEntities">
+          <EntitySetMapping Name="StaffList">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.StaffList">
+              <MappingFragment StoreEntitySet="StaffList">
+                <ScalarProperty Name="PersonnelKey" ColumnName="PersonnelKey" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Pic" ColumnName="Pic" />
+                <ScalarProperty Name="PicType" ColumnName="PicType" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+                <ScalarProperty Name="Usergr" ColumnName="Usergr" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsUser" ColumnName="IsUser" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usergroup">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.Usergroup">
+              <MappingFragment StoreEntitySet="Usergroup">
+                <ScalarProperty Name="UserGroupKey" ColumnName="UserGroupKey" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroupForm">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.UserGroupForm">
+              <MappingFragment StoreEntitySet="UserGroupForm">
+                <ScalarProperty Name="UserGroupFormKey" ColumnName="UserGroupFormKey" />
+                <ScalarProperty Name="UserGroupKey" ColumnName="UserGroupKey" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+                <ScalarProperty Name="ModuleKey" ColumnName="ModuleKey" />
+                <ScalarProperty Name="FormKey" ColumnName="FormKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroupModule">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.UserGroupModule">
+              <MappingFragment StoreEntitySet="UserGroupModule">
+                <ScalarProperty Name="UserGroupModuleKey" ColumnName="UserGroupModuleKey" />
+                <ScalarProperty Name="UserGroupKey" ColumnName="UserGroupKey" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+                <ScalarProperty Name="ModuleKey" ColumnName="ModuleKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ZIPKey" ColumnName="ZIPKey" />
+                <ScalarProperty Name="CityKey" ColumnName="CityKey" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="LogoType" ColumnName="LogoType" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="ContactPersonNo" ColumnName="ContactPersonNo" />
+                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+                <ScalarProperty Name="CompanyFax" ColumnName="CompanyFax" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="CompanyEmail" ColumnName="CompanyEmail" />
+                <ScalarProperty Name="CompanyMobile" ColumnName="CompanyMobile" />
+                <ScalarProperty Name="CompanyPhone" ColumnName="CompanyPhone" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
