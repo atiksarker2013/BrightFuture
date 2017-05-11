@@ -29,6 +29,28 @@
           <Property Name="Title" Type="nvarchar(max)" />
           <Property Name="ContactEmail" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Forms">
+          <Key>
+            <PropertyRef Name="FormID" />
+          </Key>
+          <Property Name="FormID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModuleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FormName" Type="nvarchar(max)" />
+          <Property Name="FormLevel" Type="int" />
+          <Property Name="FormController" Type="nvarchar(max)" />
+          <Property Name="FormView" Type="nvarchar(max)" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModuleName" Type="nvarchar(max)" />
+          <Property Name="ModuleLevel" Type="int" />
+          <Property Name="NoSub" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
         <EntityType Name="StaffList">
           <Key>
             <PropertyRef Name="PersonnelKey" />
@@ -79,6 +101,8 @@
         </EntityType>
         <EntityContainer Name="BrightFutureHoustoneModelStoreContainer">
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forms" EntityType="Self.Forms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StaffList" EntityType="Self.StaffList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usergroup" EntityType="Self.Usergroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroupForm" EntityType="Self.UserGroupForm" Schema="dbo" store:Type="Tables" />
@@ -142,6 +166,8 @@
           <EntitySet Name="UserGroupForm" EntityType="Self.UserGroupForm" />
           <EntitySet Name="UserGroupModule" EntityType="Self.UserGroupModule" />
           <EntitySet Name="Company" EntityType="BrightFutureHoustoneModel.Company" />
+          <EntitySet Name="Forms" EntityType="BrightFutureHoustoneModel.Forms" />
+          <EntitySet Name="Modules" EntityType="BrightFutureHoustoneModel.Modules" />
         </EntityContainer>
         <EntityType Name="Company">
           <Key>
@@ -166,6 +192,28 @@
           <Property Name="ZIPKey" Type="Int64" />
           <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Forms">
+          <Key>
+            <PropertyRef Name="FormID" />
+          </Key>
+          <Property Name="FormID" Type="Guid" Nullable="false" />
+          <Property Name="ModuleID" Type="Guid" Nullable="false" />
+          <Property Name="FormName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FormLevel" Type="Int32" />
+          <Property Name="FormController" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FormView" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="Guid" Nullable="false" />
+          <Property Name="ModuleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleLevel" Type="Int32" />
+          <Property Name="NoSub" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -247,6 +295,30 @@
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
                 <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forms">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.Forms">
+              <MappingFragment StoreEntitySet="Forms">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="FormView" ColumnName="FormView" />
+                <ScalarProperty Name="FormController" ColumnName="FormController" />
+                <ScalarProperty Name="FormLevel" ColumnName="FormLevel" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="FormID" ColumnName="FormID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.Modules">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="NoSub" ColumnName="NoSub" />
+                <ScalarProperty Name="ModuleLevel" ColumnName="ModuleLevel" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

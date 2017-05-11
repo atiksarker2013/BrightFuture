@@ -226,10 +226,16 @@
       <DependentUpon>BrightFutureModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyClass.cs" />
+    <Compile Include="Models\Forms.cs">
+      <DependentUpon>BrightFutureModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FormValidation.cs" />
     <Compile Include="Models\GlobalClass.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Modules.cs">
+      <DependentUpon>BrightFutureModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StaffClass.cs" />
     <Compile Include="Models\StaffList.cs">
       <DependentUpon>BrightFutureModel.tt</DependentUpon>

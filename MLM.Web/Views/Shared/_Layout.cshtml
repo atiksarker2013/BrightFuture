@@ -26,29 +26,25 @@
   window.onunload=function(){null};
     </script>*@
 </head>
- 
+ @using MLM.Web.Models
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
 
                 <a class="navbar-brand" href="@Url.Action("Index", "UserHome")">
-                    RCS
-                    @*<center><img src="~/Content/ss_logo_small.png" height="50px" /></center>*@
+ 
+                    Bright Future BD                    @*<center><img src="~/Content/ss_logo_small.png" height="50px" /></center>*@
                 </a>
             </div>
 
             <div class="notifications-wrapper">
                 <ul class="nav">
                     <li><div style="padding-left:400px;"></div></li>
-                    @*<li><img src="@Url.Action("GetCompanyLogo", "ShowImage" ,new{id=GlobalClass.Company.CompanyKey})" alt="User Image" height="70px" /></li>*@
-
-
-                    <li style="float:right;"><a href="@Url.Action("Setup","UserHome")"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
 
                     <li style="float:right;" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user-plus"></i>  <i class="fa fa-caret-down"></i>
+                            <i class="glyphicon glyphicon-cog"></i> User <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li>
@@ -63,7 +59,13 @@
                             </li>
                         </ul>
                     </li>
+                    
+                    <li style="float:right;"><a href="@Url.Action("Setup","UserHome")"><i class="glyphicon fa fa-user-plus"></i> Investment</a></li>
 
+                    <li style="float:right;"><a href="@Url.Action("Setup","UserHome")"><i class="glyphicon fa fa-user-plus"></i> Center</a></li>
+
+                    <li style="float:right;"><a href="@Url.Action("Setup","UserHome")"><i class="glyphicon fa fa-user-plus"></i> Member</a></li>
+                   
                 </ul>
 
             </div>
@@ -76,10 +78,10 @@
 
 
                         <li class="me">
-                            <a href="@Url.Action("Index", "UserHome")"><i class="fa fa-dashboard "></i>Home</a>
+                            <a href="@Url.Action("Index", "UserHome")"><i class="fa fa-dashboard "></i>Dashboard</a>
                         </li>
-                        @*@{
-                            RCSdbEntities db = new RCSdbEntities();
+                        @{
+                            BrightFutureHoustoneEntities db = new BrightFutureHoustoneEntities();
 
                             var SeMod = from x in db.UserGroupModule where x.Modules.IsDelete == false && x.UserGroupKey == GlobalClass.LoginUser.Usergr && x.CompanyKey == GlobalClass.Company.CompanyKey select x;
                             SeMod = SeMod.OrderBy(m => m.Modules.ModuleLevel);
@@ -117,7 +119,7 @@
                                 </li>
                             }
 
-                        }*@
+                        }
 
 
 
