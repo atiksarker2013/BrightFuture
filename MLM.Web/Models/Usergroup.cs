@@ -14,9 +14,25 @@ namespace MLM.Web.Models
     
     public partial class Usergroup
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Usergroup()
+        {
+            this.StaffList = new HashSet<StaffList>();
+            this.UserGroupForm = new HashSet<UserGroupForm>();
+            this.UserGroupModule = new HashSet<UserGroupModule>();
+        }
+    
         public System.Guid UserGroupKey { get; set; }
         public string GroupID { get; set; }
         public string GroupName { get; set; }
         public System.Guid CompanyKey { get; set; }
+    
+        public virtual Company Company { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StaffList> StaffList { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserGroupForm> UserGroupForm { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserGroupModule> UserGroupModule { get; set; }
     }
 }

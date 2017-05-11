@@ -14,10 +14,25 @@ namespace MLM.Web.Models
     
     public partial class Modules
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Modules()
+        {
+            this.Forms = new HashSet<Forms>();
+            this.UserGroupForm = new HashSet<UserGroupForm>();
+            this.UserGroupModule = new HashSet<UserGroupModule>();
+        }
+    
         public System.Guid ModuleID { get; set; }
         public string ModuleName { get; set; }
         public Nullable<int> ModuleLevel { get; set; }
         public Nullable<bool> NoSub { get; set; }
         public Nullable<bool> IsDelete { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Forms> Forms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserGroupForm> UserGroupForm { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserGroupModule> UserGroupModule { get; set; }
     }
 }

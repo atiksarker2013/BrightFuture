@@ -14,6 +14,12 @@ namespace MLM.Web.Models
     
     public partial class Forms
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Forms()
+        {
+            this.UserGroupForm = new HashSet<UserGroupForm>();
+        }
+    
         public System.Guid FormID { get; set; }
         public System.Guid ModuleID { get; set; }
         public string FormName { get; set; }
@@ -21,5 +27,9 @@ namespace MLM.Web.Models
         public string FormController { get; set; }
         public string FormView { get; set; }
         public Nullable<bool> IsDelete { get; set; }
+    
+        public virtual Modules Modules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserGroupForm> UserGroupForm { get; set; }
     }
 }

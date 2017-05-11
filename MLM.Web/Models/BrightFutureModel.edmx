@@ -99,6 +99,102 @@
           <Property Name="CompanyKey" Type="uniqueidentifier" />
           <Property Name="ModuleKey" Type="uniqueidentifier" />
         </EntityType>
+        <Association Name="FK_Forms_Modules">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="Forms" Type="Self.Forms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="Forms">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffList_Usergroup">
+          <End Role="Usergroup" Type="Self.Usergroup" Multiplicity="0..1" />
+          <End Role="StaffList" Type="Self.StaffList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usergroup">
+              <PropertyRef Name="UserGroupKey" />
+            </Principal>
+            <Dependent Role="StaffList">
+              <PropertyRef Name="Usergr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usergroup_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Usergroup" Type="Self.Usergroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyKey" />
+            </Principal>
+            <Dependent Role="Usergroup">
+              <PropertyRef Name="CompanyKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupForm_Forms">
+          <End Role="Forms" Type="Self.Forms" Multiplicity="0..1" />
+          <End Role="UserGroupForm" Type="Self.UserGroupForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="FormID" />
+            </Principal>
+            <Dependent Role="UserGroupForm">
+              <PropertyRef Name="FormKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupForm_Modules">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+          <End Role="UserGroupForm" Type="Self.UserGroupForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="UserGroupForm">
+              <PropertyRef Name="ModuleKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupForm_Usergroup">
+          <End Role="Usergroup" Type="Self.Usergroup" Multiplicity="0..1" />
+          <End Role="UserGroupForm" Type="Self.UserGroupForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usergroup">
+              <PropertyRef Name="UserGroupKey" />
+            </Principal>
+            <Dependent Role="UserGroupForm">
+              <PropertyRef Name="UserGroupKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupModule_Modules">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+          <End Role="UserGroupModule" Type="Self.UserGroupModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="UserGroupModule">
+              <PropertyRef Name="ModuleKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupModule_Usergroup">
+          <End Role="Usergroup" Type="Self.Usergroup" Multiplicity="0..1" />
+          <End Role="UserGroupModule" Type="Self.UserGroupModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usergroup">
+              <PropertyRef Name="UserGroupKey" />
+            </Principal>
+            <Dependent Role="UserGroupModule">
+              <PropertyRef Name="UserGroupKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BrightFutureHoustoneModelStoreContainer">
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Forms" EntityType="Self.Forms" Schema="dbo" store:Type="Tables" />
@@ -107,67 +203,83 @@
           <EntitySet Name="Usergroup" EntityType="Self.Usergroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroupForm" EntityType="Self.UserGroupForm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroupModule" EntityType="Self.UserGroupModule" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Forms_Modules" Association="Self.FK_Forms_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Forms" EntitySet="Forms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffList_Usergroup" Association="Self.FK_StaffList_Usergroup">
+            <End Role="Usergroup" EntitySet="Usergroup" />
+            <End Role="StaffList" EntitySet="StaffList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usergroup_Company" Association="Self.FK_Usergroup_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Usergroup" EntitySet="Usergroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupForm_Forms" Association="Self.FK_UserGroupForm_Forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="UserGroupForm" EntitySet="UserGroupForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupForm_Modules" Association="Self.FK_UserGroupForm_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="UserGroupForm" EntitySet="UserGroupForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupForm_Usergroup" Association="Self.FK_UserGroupForm_Usergroup">
+            <End Role="Usergroup" EntitySet="Usergroup" />
+            <End Role="UserGroupForm" EntitySet="UserGroupForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupModule_Modules" Association="Self.FK_UserGroupModule_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="UserGroupModule" EntitySet="UserGroupModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupModule_Usergroup" Association="Self.FK_UserGroupModule_Usergroup">
+            <End Role="Usergroup" EntitySet="Usergroup" />
+            <End Role="UserGroupModule" EntitySet="UserGroupModule" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BrightFutureHoustoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="StaffList">
-          <Key>
-            <PropertyRef Name="PersonnelKey" />
-          </Key>
-          <Property Name="PersonnelKey" Type="Guid" Nullable="false" />
-          <Property Name="PID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Pic" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PicType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyKey" Type="Guid" />
-          <Property Name="Usergr" Type="Guid" />
-          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsUser" Type="Boolean" />
-          <Property Name="IsDelete" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Usergroup">
-          <Key>
-            <PropertyRef Name="UserGroupKey" />
-          </Key>
-          <Property Name="UserGroupKey" Type="Guid" Nullable="false" />
-          <Property Name="GroupID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="GroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyKey" Type="Guid" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserGroupForm">
-          <Key>
-            <PropertyRef Name="UserGroupFormKey" />
-          </Key>
-          <Property Name="UserGroupFormKey" Type="Guid" Nullable="false" />
-          <Property Name="UserGroupKey" Type="Guid" />
-          <Property Name="CompanyKey" Type="Guid" />
-          <Property Name="ModuleKey" Type="Guid" />
-          <Property Name="FormKey" Type="Guid" />
-        </EntityType>
-        <EntityType Name="UserGroupModule">
-          <Key>
-            <PropertyRef Name="UserGroupModuleKey" />
-          </Key>
-          <Property Name="UserGroupModuleKey" Type="Guid" Nullable="false" />
-          <Property Name="UserGroupKey" Type="Guid" />
-          <Property Name="CompanyKey" Type="Guid" />
-          <Property Name="ModuleKey" Type="Guid" />
-        </EntityType>
         <EntityContainer Name="BrightFutureHoustoneEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="StaffList" EntityType="Self.StaffList" />
-          <EntitySet Name="Usergroup" EntityType="Self.Usergroup" />
-          <EntitySet Name="UserGroupForm" EntityType="Self.UserGroupForm" />
-          <EntitySet Name="UserGroupModule" EntityType="Self.UserGroupModule" />
           <EntitySet Name="Company" EntityType="BrightFutureHoustoneModel.Company" />
           <EntitySet Name="Forms" EntityType="BrightFutureHoustoneModel.Forms" />
           <EntitySet Name="Modules" EntityType="BrightFutureHoustoneModel.Modules" />
+          <EntitySet Name="StaffList" EntityType="BrightFutureHoustoneModel.StaffList" />
+          <EntitySet Name="Usergroup" EntityType="BrightFutureHoustoneModel.Usergroup" />
+          <EntitySet Name="UserGroupForm" EntityType="BrightFutureHoustoneModel.UserGroupForm" />
+          <EntitySet Name="UserGroupModule" EntityType="BrightFutureHoustoneModel.UserGroupModule" />
+          <AssociationSet Name="FK_Usergroup_Company" Association="BrightFutureHoustoneModel.FK_Usergroup_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Usergroup" EntitySet="Usergroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Forms_Modules" Association="BrightFutureHoustoneModel.FK_Forms_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="Forms" EntitySet="Forms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupForm_Forms" Association="BrightFutureHoustoneModel.FK_UserGroupForm_Forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="UserGroupForm" EntitySet="UserGroupForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupForm_Modules" Association="BrightFutureHoustoneModel.FK_UserGroupForm_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="UserGroupForm" EntitySet="UserGroupForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupModule_Modules" Association="BrightFutureHoustoneModel.FK_UserGroupModule_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="UserGroupModule" EntitySet="UserGroupModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffList_Usergroup" Association="BrightFutureHoustoneModel.FK_StaffList_Usergroup">
+            <End Role="Usergroup" EntitySet="Usergroup" />
+            <End Role="StaffList" EntitySet="StaffList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupForm_Usergroup" Association="BrightFutureHoustoneModel.FK_UserGroupForm_Usergroup">
+            <End Role="Usergroup" EntitySet="Usergroup" />
+            <End Role="UserGroupForm" EntitySet="UserGroupForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupModule_Usergroup" Association="BrightFutureHoustoneModel.FK_UserGroupModule_Usergroup">
+            <End Role="Usergroup" EntitySet="Usergroup" />
+            <End Role="UserGroupModule" EntitySet="UserGroupModule" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Company">
           <Key>
@@ -192,6 +304,7 @@
           <Property Name="ZIPKey" Type="Int64" />
           <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usergroup" Relationship="BrightFutureHoustoneModel.FK_Usergroup_Company" FromRole="Company" ToRole="Usergroup" />
         </EntityType>
         <EntityType Name="Forms">
           <Key>
@@ -204,6 +317,8 @@
           <Property Name="FormController" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FormView" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Modules" Relationship="BrightFutureHoustoneModel.FK_Forms_Modules" FromRole="Forms" ToRole="Modules" />
+          <NavigationProperty Name="UserGroupForm" Relationship="BrightFutureHoustoneModel.FK_UserGroupForm_Forms" FromRole="Forms" ToRole="UserGroupForm" />
         </EntityType>
         <EntityType Name="Modules">
           <Key>
@@ -214,65 +329,170 @@
           <Property Name="ModuleLevel" Type="Int32" />
           <Property Name="NoSub" Type="Boolean" />
           <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Forms" Relationship="BrightFutureHoustoneModel.FK_Forms_Modules" FromRole="Modules" ToRole="Forms" />
+          <NavigationProperty Name="UserGroupForm" Relationship="BrightFutureHoustoneModel.FK_UserGroupForm_Modules" FromRole="Modules" ToRole="UserGroupForm" />
+          <NavigationProperty Name="UserGroupModule" Relationship="BrightFutureHoustoneModel.FK_UserGroupModule_Modules" FromRole="Modules" ToRole="UserGroupModule" />
         </EntityType>
-      </Schema>
+        <EntityType Name="StaffList">
+          <Key>
+            <PropertyRef Name="PersonnelKey" />
+          </Key>
+          <Property Name="PersonnelKey" Type="Guid" Nullable="false" />
+          <Property Name="PID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PicType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyKey" Type="Guid" />
+          <Property Name="Usergr" Type="Guid" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsUser" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Usergroup" Relationship="BrightFutureHoustoneModel.FK_StaffList_Usergroup" FromRole="StaffList" ToRole="Usergroup" />
+        </EntityType>
+        <EntityType Name="Usergroup">
+          <Key>
+            <PropertyRef Name="UserGroupKey" />
+          </Key>
+          <Property Name="UserGroupKey" Type="Guid" Nullable="false" />
+          <Property Name="GroupID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyKey" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="BrightFutureHoustoneModel.FK_Usergroup_Company" FromRole="Usergroup" ToRole="Company" />
+          <NavigationProperty Name="StaffList" Relationship="BrightFutureHoustoneModel.FK_StaffList_Usergroup" FromRole="Usergroup" ToRole="StaffList" />
+          <NavigationProperty Name="UserGroupForm" Relationship="BrightFutureHoustoneModel.FK_UserGroupForm_Usergroup" FromRole="Usergroup" ToRole="UserGroupForm" />
+          <NavigationProperty Name="UserGroupModule" Relationship="BrightFutureHoustoneModel.FK_UserGroupModule_Usergroup" FromRole="Usergroup" ToRole="UserGroupModule" />
+        </EntityType>
+        <EntityType Name="UserGroupForm">
+          <Key>
+            <PropertyRef Name="UserGroupFormKey" />
+          </Key>
+          <Property Name="UserGroupFormKey" Type="Guid" Nullable="false" />
+          <Property Name="UserGroupKey" Type="Guid" />
+          <Property Name="CompanyKey" Type="Guid" />
+          <Property Name="ModuleKey" Type="Guid" />
+          <Property Name="FormKey" Type="Guid" />
+          <NavigationProperty Name="Forms" Relationship="BrightFutureHoustoneModel.FK_UserGroupForm_Forms" FromRole="UserGroupForm" ToRole="Forms" />
+          <NavigationProperty Name="Modules" Relationship="BrightFutureHoustoneModel.FK_UserGroupForm_Modules" FromRole="UserGroupForm" ToRole="Modules" />
+          <NavigationProperty Name="Usergroup" Relationship="BrightFutureHoustoneModel.FK_UserGroupForm_Usergroup" FromRole="UserGroupForm" ToRole="Usergroup" />
+        </EntityType>
+        <EntityType Name="UserGroupModule">
+          <Key>
+            <PropertyRef Name="UserGroupModuleKey" />
+          </Key>
+          <Property Name="UserGroupModuleKey" Type="Guid" Nullable="false" />
+          <Property Name="UserGroupKey" Type="Guid" />
+          <Property Name="CompanyKey" Type="Guid" />
+          <Property Name="ModuleKey" Type="Guid" />
+          <NavigationProperty Name="Modules" Relationship="BrightFutureHoustoneModel.FK_UserGroupModule_Modules" FromRole="UserGroupModule" ToRole="Modules" />
+          <NavigationProperty Name="Usergroup" Relationship="BrightFutureHoustoneModel.FK_UserGroupModule_Usergroup" FromRole="UserGroupModule" ToRole="Usergroup" />
+        </EntityType>
+        <Association Name="FK_Usergroup_Company">
+          <End Type="BrightFutureHoustoneModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="BrightFutureHoustoneModel.Usergroup" Role="Usergroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyKey" />
+            </Principal>
+            <Dependent Role="Usergroup">
+              <PropertyRef Name="CompanyKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Forms_Modules">
+          <End Type="BrightFutureHoustoneModel.Modules" Role="Modules" Multiplicity="1" />
+          <End Type="BrightFutureHoustoneModel.Forms" Role="Forms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="Forms">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupForm_Forms">
+          <End Type="BrightFutureHoustoneModel.Forms" Role="Forms" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.UserGroupForm" Role="UserGroupForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="FormID" />
+            </Principal>
+            <Dependent Role="UserGroupForm">
+              <PropertyRef Name="FormKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupForm_Modules">
+          <End Type="BrightFutureHoustoneModel.Modules" Role="Modules" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.UserGroupForm" Role="UserGroupForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="UserGroupForm">
+              <PropertyRef Name="ModuleKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupModule_Modules">
+          <End Type="BrightFutureHoustoneModel.Modules" Role="Modules" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.UserGroupModule" Role="UserGroupModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="UserGroupModule">
+              <PropertyRef Name="ModuleKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffList_Usergroup">
+          <End Type="BrightFutureHoustoneModel.Usergroup" Role="Usergroup" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.StaffList" Role="StaffList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usergroup">
+              <PropertyRef Name="UserGroupKey" />
+            </Principal>
+            <Dependent Role="StaffList">
+              <PropertyRef Name="Usergr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupForm_Usergroup">
+          <End Type="BrightFutureHoustoneModel.Usergroup" Role="Usergroup" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.UserGroupForm" Role="UserGroupForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usergroup">
+              <PropertyRef Name="UserGroupKey" />
+            </Principal>
+            <Dependent Role="UserGroupForm">
+              <PropertyRef Name="UserGroupKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupModule_Usergroup">
+          <End Type="BrightFutureHoustoneModel.Usergroup" Role="Usergroup" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.UserGroupModule" Role="UserGroupModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usergroup">
+              <PropertyRef Name="UserGroupKey" />
+            </Principal>
+            <Dependent Role="UserGroupModule">
+              <PropertyRef Name="UserGroupKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BrightFutureHoustoneModelStoreContainer" CdmEntityContainer="BrightFutureHoustoneEntities">
-          <EntitySetMapping Name="StaffList">
-            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.StaffList">
-              <MappingFragment StoreEntitySet="StaffList">
-                <ScalarProperty Name="PersonnelKey" ColumnName="PersonnelKey" />
-                <ScalarProperty Name="PID" ColumnName="PID" />
-                <ScalarProperty Name="PName" ColumnName="PName" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Mail" ColumnName="Mail" />
-                <ScalarProperty Name="Designation" ColumnName="Designation" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Pic" ColumnName="Pic" />
-                <ScalarProperty Name="PicType" ColumnName="PicType" />
-                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
-                <ScalarProperty Name="Usergr" ColumnName="Usergr" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="IsUser" ColumnName="IsUser" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usergroup">
-            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.Usergroup">
-              <MappingFragment StoreEntitySet="Usergroup">
-                <ScalarProperty Name="UserGroupKey" ColumnName="UserGroupKey" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserGroupForm">
-            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.UserGroupForm">
-              <MappingFragment StoreEntitySet="UserGroupForm">
-                <ScalarProperty Name="UserGroupFormKey" ColumnName="UserGroupFormKey" />
-                <ScalarProperty Name="UserGroupKey" ColumnName="UserGroupKey" />
-                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
-                <ScalarProperty Name="ModuleKey" ColumnName="ModuleKey" />
-                <ScalarProperty Name="FormKey" ColumnName="FormKey" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserGroupModule">
-            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.UserGroupModule">
-              <MappingFragment StoreEntitySet="UserGroupModule">
-                <ScalarProperty Name="UserGroupModuleKey" ColumnName="UserGroupModuleKey" />
-                <ScalarProperty Name="UserGroupKey" ColumnName="UserGroupKey" />
-                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
-                <ScalarProperty Name="ModuleKey" ColumnName="ModuleKey" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Company">
             <EntityTypeMapping TypeName="BrightFutureHoustoneModel.Company">
               <MappingFragment StoreEntitySet="Company">
@@ -319,6 +539,58 @@
                 <ScalarProperty Name="ModuleLevel" ColumnName="ModuleLevel" />
                 <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
                 <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffList">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.StaffList">
+              <MappingFragment StoreEntitySet="StaffList">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsUser" ColumnName="IsUser" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Usergr" ColumnName="Usergr" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+                <ScalarProperty Name="PicType" ColumnName="PicType" />
+                <ScalarProperty Name="Pic" ColumnName="Pic" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="PersonnelKey" ColumnName="PersonnelKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usergroup">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.Usergroup">
+              <MappingFragment StoreEntitySet="Usergroup">
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="UserGroupKey" ColumnName="UserGroupKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroupForm">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.UserGroupForm">
+              <MappingFragment StoreEntitySet="UserGroupForm">
+                <ScalarProperty Name="FormKey" ColumnName="FormKey" />
+                <ScalarProperty Name="ModuleKey" ColumnName="ModuleKey" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+                <ScalarProperty Name="UserGroupKey" ColumnName="UserGroupKey" />
+                <ScalarProperty Name="UserGroupFormKey" ColumnName="UserGroupFormKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroupModule">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.UserGroupModule">
+              <MappingFragment StoreEntitySet="UserGroupModule">
+                <ScalarProperty Name="ModuleKey" ColumnName="ModuleKey" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+                <ScalarProperty Name="UserGroupKey" ColumnName="UserGroupKey" />
+                <ScalarProperty Name="UserGroupModuleKey" ColumnName="UserGroupModuleKey" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -19,5 +19,9 @@ namespace MLM.Web.Models
         public Nullable<System.Guid> CompanyKey { get; set; }
         public Nullable<System.Guid> ModuleKey { get; set; }
         public Nullable<System.Guid> FormKey { get; set; }
+    
+        public virtual Forms Forms { get; set; }
+        public virtual Modules Modules { get; set; }
+        public virtual Usergroup Usergroup { get; set; }
     }
 }

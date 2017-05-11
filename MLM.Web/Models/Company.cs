@@ -14,6 +14,12 @@ namespace MLM.Web.Models
     
     public partial class Company
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Company()
+        {
+            this.Usergroup = new HashSet<Usergroup>();
+        }
+    
         public System.Guid CompanyKey { get; set; }
         public string CompanyID { get; set; }
         public string CompanyName { get; set; }
@@ -33,5 +39,8 @@ namespace MLM.Web.Models
         public Nullable<long> ZIPKey { get; set; }
         public string Title { get; set; }
         public string ContactEmail { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usergroup> Usergroup { get; set; }
     }
 }
