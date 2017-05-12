@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssignAccessController.cs" />
+    <Compile Include="Controllers\BusinessCentersController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -651,6 +652,7 @@
     <Folder Include="ckeditor\" />
     <Folder Include="Content\datetimepicker-master\build\" />
     <Folder Include="Printingcss\" />
+    <Folder Include="Views\BusinessCenters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
