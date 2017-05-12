@@ -5,14 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5d9c60747b2942e2b6103319425fcd46" Name="Diagram1">
-        <EntityTypeShape EntityType="BrightFutureHoustoneModel.Company" Width="1.5" PointX="0.5" PointY="5" />
-        <EntityTypeShape EntityType="BrightFutureHoustoneModel.Forms" Width="1.5" PointX="5.75" PointY="0.5" />
-        <EntityTypeShape EntityType="BrightFutureHoustoneModel.Modules" Width="1.5" PointX="3.5" PointY="0.625" />
-        <EntityTypeShape EntityType="BrightFutureHoustoneModel.StaffList" Width="1.5" PointX="5" PointY="10" />
-        <EntityTypeShape EntityType="BrightFutureHoustoneModel.Usergroup" Width="1.5" PointX="3.75" PointY="4.5" />
-        <EntityTypeShape EntityType="BrightFutureHoustoneModel.UserGroupForm" Width="1.5" PointX="8" PointY="4.625" />
-        <EntityTypeShape EntityType="BrightFutureHoustoneModel.UserGroupModule" Width="1.5" PointX="1.125" PointY="2.25" />
+        <EntityTypeShape EntityType="BrightFutureHoustoneModel.Company" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BrightFutureHoustoneModel.CompanyForm" Width="1.5" PointX="5.25" PointY="11.625" />
+        <EntityTypeShape EntityType="BrightFutureHoustoneModel.CompanyModule" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="BrightFutureHoustoneModel.Forms" Width="1.5" PointX="3" PointY="15.625" />
+        <EntityTypeShape EntityType="BrightFutureHoustoneModel.Modules" Width="1.5" PointX="0.75" PointY="6.875" />
+        <EntityTypeShape EntityType="BrightFutureHoustoneModel.StaffList" Width="1.5" PointX="3" PointY="10.375" />
+        <EntityTypeShape EntityType="BrightFutureHoustoneModel.Usergroup" Width="1.5" PointX="0.75" PointY="11.125" />
+        <EntityTypeShape EntityType="BrightFutureHoustoneModel.UserGroupForm" Width="1.5" PointX="8.25" PointY="11.5" />
+        <EntityTypeShape EntityType="BrightFutureHoustoneModel.UserGroupModule" Width="1.5" PointX="3" PointY="7.25" />
+        <AssociationConnector Association="BrightFutureHoustoneModel.FK_CompanyForm_Company" />
+        <AssociationConnector Association="BrightFutureHoustoneModel.FK_CompanyModule_Company" />
         <AssociationConnector Association="BrightFutureHoustoneModel.FK_Usergroup_Company" />
+        <AssociationConnector Association="BrightFutureHoustoneModel.FK_CompanyForm_Forms" />
+        <AssociationConnector Association="BrightFutureHoustoneModel.FK_CompanyForm_Modules" />
+        <AssociationConnector Association="BrightFutureHoustoneModel.FK_CompanyModule_Modules" />
         <AssociationConnector Association="BrightFutureHoustoneModel.FK_Forms_Modules" />
         <AssociationConnector Association="BrightFutureHoustoneModel.FK_UserGroupForm_Forms" />
         <AssociationConnector Association="BrightFutureHoustoneModel.FK_UserGroupForm_Modules" />

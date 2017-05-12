@@ -199,9 +199,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssignAccessController.cs" />
+    <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\UsergrpController.cs" />
     <Compile Include="Controllers\UserHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -226,6 +228,12 @@
       <DependentUpon>BrightFutureModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyClass.cs" />
+    <Compile Include="Models\CompanyForm.cs">
+      <DependentUpon>BrightFutureModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyModule.cs">
+      <DependentUpon>BrightFutureModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Forms.cs">
       <DependentUpon>BrightFutureModel.tt</DependentUpon>
     </Compile>
@@ -629,6 +637,14 @@
     <Content Include="Views\UserHome\Login.cshtml" />
     <Content Include="Views\UserHome\Index.cshtml" />
     <Content Include="Views\Shared\ErrorLayout.cshtml" />
+    <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\Staff\DIndex.cshtml" />
+    <Content Include="Views\Usergrp\Index.cshtml" />
+    <Content Include="Views\AssignAccess\Index.cshtml" />
+    <Content Include="Views\Companies\UserEdit.cshtml" />
+    <Content Include="Views\Companies\UserDetails.cshtml" />
+    <Content Include="Views\AssignAccess\DIndex.cshtml" />
+    <Content Include="Views\AssignAccess\Access.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

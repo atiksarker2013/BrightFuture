@@ -29,6 +29,23 @@
           <Property Name="Title" Type="nvarchar(max)" />
           <Property Name="ContactEmail" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="CompanyForm">
+          <Key>
+            <PropertyRef Name="CompanyFormKey" />
+          </Key>
+          <Property Name="CompanyFormKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FormKey" Type="uniqueidentifier" />
+          <Property Name="CompanyKey" Type="uniqueidentifier" />
+          <Property Name="ModuleKey" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="CompanyModule">
+          <Key>
+            <PropertyRef Name="CompanyModuleID" />
+          </Key>
+          <Property Name="CompanyModuleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CompanyKey" Type="uniqueidentifier" />
+          <Property Name="ModuleKey" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="Forms">
           <Key>
             <PropertyRef Name="FormID" />
@@ -99,6 +116,66 @@
           <Property Name="CompanyKey" Type="uniqueidentifier" />
           <Property Name="ModuleKey" Type="uniqueidentifier" />
         </EntityType>
+        <Association Name="FK_CompanyForm_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="CompanyForm" Type="Self.CompanyForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyKey" />
+            </Principal>
+            <Dependent Role="CompanyForm">
+              <PropertyRef Name="CompanyKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyForm_Forms">
+          <End Role="Forms" Type="Self.Forms" Multiplicity="0..1" />
+          <End Role="CompanyForm" Type="Self.CompanyForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="FormID" />
+            </Principal>
+            <Dependent Role="CompanyForm">
+              <PropertyRef Name="FormKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyForm_Modules">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+          <End Role="CompanyForm" Type="Self.CompanyForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="CompanyForm">
+              <PropertyRef Name="ModuleKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyModule_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="CompanyModule" Type="Self.CompanyModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyKey" />
+            </Principal>
+            <Dependent Role="CompanyModule">
+              <PropertyRef Name="CompanyKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyModule_Modules">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="0..1" />
+          <End Role="CompanyModule" Type="Self.CompanyModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="CompanyModule">
+              <PropertyRef Name="ModuleKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Forms_Modules">
           <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
           <End Role="Forms" Type="Self.Forms" Multiplicity="*" />
@@ -197,12 +274,34 @@
         </Association>
         <EntityContainer Name="BrightFutureHoustoneModelStoreContainer">
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyForm" EntityType="Self.CompanyForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyModule" EntityType="Self.CompanyModule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Forms" EntityType="Self.Forms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StaffList" EntityType="Self.StaffList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usergroup" EntityType="Self.Usergroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroupForm" EntityType="Self.UserGroupForm" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroupModule" EntityType="Self.UserGroupModule" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CompanyForm_Company" Association="Self.FK_CompanyForm_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyForm" EntitySet="CompanyForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyForm_Forms" Association="Self.FK_CompanyForm_Forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="CompanyForm" EntitySet="CompanyForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyForm_Modules" Association="Self.FK_CompanyForm_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="CompanyForm" EntitySet="CompanyForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyModule_Company" Association="Self.FK_CompanyModule_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyModule" EntitySet="CompanyModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyModule_Modules" Association="Self.FK_CompanyModule_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="CompanyModule" EntitySet="CompanyModule" />
+          </AssociationSet>
           <AssociationSet Name="FK_Forms_Modules" Association="Self.FK_Forms_Modules">
             <End Role="Modules" EntitySet="Modules" />
             <End Role="Forms" EntitySet="Forms" />
@@ -242,15 +341,37 @@
       <Schema Namespace="BrightFutureHoustoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BrightFutureHoustoneEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Company" EntityType="BrightFutureHoustoneModel.Company" />
+          <EntitySet Name="CompanyForm" EntityType="BrightFutureHoustoneModel.CompanyForm" />
+          <EntitySet Name="CompanyModule" EntityType="BrightFutureHoustoneModel.CompanyModule" />
           <EntitySet Name="Forms" EntityType="BrightFutureHoustoneModel.Forms" />
           <EntitySet Name="Modules" EntityType="BrightFutureHoustoneModel.Modules" />
           <EntitySet Name="StaffList" EntityType="BrightFutureHoustoneModel.StaffList" />
           <EntitySet Name="Usergroup" EntityType="BrightFutureHoustoneModel.Usergroup" />
           <EntitySet Name="UserGroupForm" EntityType="BrightFutureHoustoneModel.UserGroupForm" />
           <EntitySet Name="UserGroupModule" EntityType="BrightFutureHoustoneModel.UserGroupModule" />
+          <AssociationSet Name="FK_CompanyForm_Company" Association="BrightFutureHoustoneModel.FK_CompanyForm_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyForm" EntitySet="CompanyForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyModule_Company" Association="BrightFutureHoustoneModel.FK_CompanyModule_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyModule" EntitySet="CompanyModule" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usergroup_Company" Association="BrightFutureHoustoneModel.FK_Usergroup_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Usergroup" EntitySet="Usergroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyForm_Forms" Association="BrightFutureHoustoneModel.FK_CompanyForm_Forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="CompanyForm" EntitySet="CompanyForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyForm_Modules" Association="BrightFutureHoustoneModel.FK_CompanyForm_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="CompanyForm" EntitySet="CompanyForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyModule_Modules" Association="BrightFutureHoustoneModel.FK_CompanyModule_Modules">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="CompanyModule" EntitySet="CompanyModule" />
           </AssociationSet>
           <AssociationSet Name="FK_Forms_Modules" Association="BrightFutureHoustoneModel.FK_Forms_Modules">
             <End Role="Modules" EntitySet="Modules" />
@@ -304,7 +425,31 @@
           <Property Name="ZIPKey" Type="Int64" />
           <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CompanyForm" Relationship="BrightFutureHoustoneModel.FK_CompanyForm_Company" FromRole="Company" ToRole="CompanyForm" />
+          <NavigationProperty Name="CompanyModule" Relationship="BrightFutureHoustoneModel.FK_CompanyModule_Company" FromRole="Company" ToRole="CompanyModule" />
           <NavigationProperty Name="Usergroup" Relationship="BrightFutureHoustoneModel.FK_Usergroup_Company" FromRole="Company" ToRole="Usergroup" />
+        </EntityType>
+        <EntityType Name="CompanyForm">
+          <Key>
+            <PropertyRef Name="CompanyFormKey" />
+          </Key>
+          <Property Name="CompanyFormKey" Type="Guid" Nullable="false" />
+          <Property Name="FormKey" Type="Guid" />
+          <Property Name="CompanyKey" Type="Guid" />
+          <Property Name="ModuleKey" Type="Guid" />
+          <NavigationProperty Name="Company" Relationship="BrightFutureHoustoneModel.FK_CompanyForm_Company" FromRole="CompanyForm" ToRole="Company" />
+          <NavigationProperty Name="Forms" Relationship="BrightFutureHoustoneModel.FK_CompanyForm_Forms" FromRole="CompanyForm" ToRole="Forms" />
+          <NavigationProperty Name="Modules" Relationship="BrightFutureHoustoneModel.FK_CompanyForm_Modules" FromRole="CompanyForm" ToRole="Modules" />
+        </EntityType>
+        <EntityType Name="CompanyModule">
+          <Key>
+            <PropertyRef Name="CompanyModuleID" />
+          </Key>
+          <Property Name="CompanyModuleID" Type="Guid" Nullable="false" />
+          <Property Name="CompanyKey" Type="Guid" />
+          <Property Name="ModuleKey" Type="Guid" />
+          <NavigationProperty Name="Company" Relationship="BrightFutureHoustoneModel.FK_CompanyModule_Company" FromRole="CompanyModule" ToRole="Company" />
+          <NavigationProperty Name="Modules" Relationship="BrightFutureHoustoneModel.FK_CompanyModule_Modules" FromRole="CompanyModule" ToRole="Modules" />
         </EntityType>
         <EntityType Name="Forms">
           <Key>
@@ -317,6 +462,7 @@
           <Property Name="FormController" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FormView" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="CompanyForm" Relationship="BrightFutureHoustoneModel.FK_CompanyForm_Forms" FromRole="Forms" ToRole="CompanyForm" />
           <NavigationProperty Name="Modules" Relationship="BrightFutureHoustoneModel.FK_Forms_Modules" FromRole="Forms" ToRole="Modules" />
           <NavigationProperty Name="UserGroupForm" Relationship="BrightFutureHoustoneModel.FK_UserGroupForm_Forms" FromRole="Forms" ToRole="UserGroupForm" />
         </EntityType>
@@ -329,6 +475,8 @@
           <Property Name="ModuleLevel" Type="Int32" />
           <Property Name="NoSub" Type="Boolean" />
           <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="CompanyForm" Relationship="BrightFutureHoustoneModel.FK_CompanyForm_Modules" FromRole="Modules" ToRole="CompanyForm" />
+          <NavigationProperty Name="CompanyModule" Relationship="BrightFutureHoustoneModel.FK_CompanyModule_Modules" FromRole="Modules" ToRole="CompanyModule" />
           <NavigationProperty Name="Forms" Relationship="BrightFutureHoustoneModel.FK_Forms_Modules" FromRole="Modules" ToRole="Forms" />
           <NavigationProperty Name="UserGroupForm" Relationship="BrightFutureHoustoneModel.FK_UserGroupForm_Modules" FromRole="Modules" ToRole="UserGroupForm" />
           <NavigationProperty Name="UserGroupModule" Relationship="BrightFutureHoustoneModel.FK_UserGroupModule_Modules" FromRole="Modules" ToRole="UserGroupModule" />
@@ -391,6 +539,30 @@
           <NavigationProperty Name="Modules" Relationship="BrightFutureHoustoneModel.FK_UserGroupModule_Modules" FromRole="UserGroupModule" ToRole="Modules" />
           <NavigationProperty Name="Usergroup" Relationship="BrightFutureHoustoneModel.FK_UserGroupModule_Usergroup" FromRole="UserGroupModule" ToRole="Usergroup" />
         </EntityType>
+        <Association Name="FK_CompanyForm_Company">
+          <End Type="BrightFutureHoustoneModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.CompanyForm" Role="CompanyForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyKey" />
+            </Principal>
+            <Dependent Role="CompanyForm">
+              <PropertyRef Name="CompanyKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyModule_Company">
+          <End Type="BrightFutureHoustoneModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.CompanyModule" Role="CompanyModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyKey" />
+            </Principal>
+            <Dependent Role="CompanyModule">
+              <PropertyRef Name="CompanyKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usergroup_Company">
           <End Type="BrightFutureHoustoneModel.Company" Role="Company" Multiplicity="1" />
           <End Type="BrightFutureHoustoneModel.Usergroup" Role="Usergroup" Multiplicity="*" />
@@ -400,6 +572,42 @@
             </Principal>
             <Dependent Role="Usergroup">
               <PropertyRef Name="CompanyKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyForm_Forms">
+          <End Type="BrightFutureHoustoneModel.Forms" Role="Forms" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.CompanyForm" Role="CompanyForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="FormID" />
+            </Principal>
+            <Dependent Role="CompanyForm">
+              <PropertyRef Name="FormKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyForm_Modules">
+          <End Type="BrightFutureHoustoneModel.Modules" Role="Modules" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.CompanyForm" Role="CompanyForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="CompanyForm">
+              <PropertyRef Name="ModuleKey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyModule_Modules">
+          <End Type="BrightFutureHoustoneModel.Modules" Role="Modules" Multiplicity="0..1" />
+          <End Type="BrightFutureHoustoneModel.CompanyModule" Role="CompanyModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="CompanyModule">
+              <PropertyRef Name="ModuleKey" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -515,6 +723,25 @@
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
                 <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyForm">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.CompanyForm">
+              <MappingFragment StoreEntitySet="CompanyForm">
+                <ScalarProperty Name="ModuleKey" ColumnName="ModuleKey" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+                <ScalarProperty Name="FormKey" ColumnName="FormKey" />
+                <ScalarProperty Name="CompanyFormKey" ColumnName="CompanyFormKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyModule">
+            <EntityTypeMapping TypeName="BrightFutureHoustoneModel.CompanyModule">
+              <MappingFragment StoreEntitySet="CompanyModule">
+                <ScalarProperty Name="ModuleKey" ColumnName="ModuleKey" />
+                <ScalarProperty Name="CompanyKey" ColumnName="CompanyKey" />
+                <ScalarProperty Name="CompanyModuleID" ColumnName="CompanyModuleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
